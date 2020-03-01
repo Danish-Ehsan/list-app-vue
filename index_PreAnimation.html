@@ -1,0 +1,162 @@
+<!Doctype html>
+<html>
+
+<head>
+	<title>Idea Drawer - Vue App</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://use.typekit.net/koh0cwe.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"
+	  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	  crossorigin="anonymous">
+	</script>
+	<script type="text/javascript" src="js/vue.js"></script>
+</head>
+
+<body>
+	<div id="container">
+		<div id="vueApp">
+		<header>
+			<div id="logo"><img src="images/logo.png" alt="Idea Drawer Logo"></logo></div>
+			<div 
+				id="settings" 
+				v-bind:class="{ active: settings.settingsMode }"
+			>
+				<img src="images/settings_icon.png" alt="Settings Icon" id="settings-icon" v-on:click="settings.settingsMode = !settings.settingsMode">
+				<ul v-if="settings.settingsMode" id="settings-menu">
+					<li v-on:click="settings.sort = !settings.sort">Sort
+						<ul class="innerMenu" v-show="settings.sort">
+							<li v-on:click="sortList('name')">by name</li>
+							<li v-on:click="sortList('date')">by date</li>
+						</ul>
+					</li>
+					<li v-on:click="settings.fontSizeSetting = !settings.fontSizeSetting">Font Size
+						<ul class="innerMenu" v-show="settings.fontSizeSetting">
+							<li 
+								v-on:click="setFontSize('small')" 
+								v-bind:class="{ active: settings.fontSize == 'small' }"
+							>small</li>
+							<li 
+								v-on:click="setFontSize('medium')"
+								v-bind:class="{ active: settings.fontSize == 'medium' }"
+							>medium</li>
+							<li 
+								v-on:click="setFontSize('large')"
+								v-bind:class="{ active: settings.fontSize == 'large' }"
+							>large</li>
+						</ul>
+					</li>
+					<li v-on:click="settings.nightModeSetting = !settings.nightModeSetting">Night Mode
+						<ul class="innerMenu" v-show="settings.nightModeSetting">
+							<li 
+								v-on:click="toggleNightMode('on')" 
+								v-bind:class="{ active: settings.nightMode }"
+							>on</li>
+							<li 
+								v-on:click="toggleNightMode('off')"
+								v-bind:class="{ active: !settings.nightMode }"
+							>off</li>
+						</ul>
+					</li>
+					<li>About</li>
+				</ul>
+			</div>
+		</header>
+
+		
+			<div id="screen" v-bind:class="{ nightmode: settings.nightMode }">
+				<div id="list-container">
+					<div v-if="showMainList">
+						<ul id="main-list-container">
+							<li v-if="!lists.length" class="empty">No lists to display</li>
+							<li 
+								v-for="(list, index) in lists" 
+								v-bind:class="{ nightmode: settings.nightMode }"
+								v-bind:key="index" 
+								v-on:click="listFunction(index)"
+							>{{ list.name ? list.name : 'unnamed' }}</li>
+						</ul>
+					</div>
+
+					<div v-else id="individual-list-container">
+						<input 
+							type="text" 
+							name="list-title" 
+							id="list-title" 
+							v-bind:class="[ 'list-input', { nightmode: settings.nightMode }]"
+							v-model="lists[currentIndex].name"
+							v-bind:placeholder="lists[currentIndex].name ? '' : 'List title'"
+							ref="newTitle"
+						>
+						<ul id="individual-list">
+							<li v-for='(item, index) in lists[currentIndex].items' v-if="!item.crossedOff" v-bind:key="item.timestamp">
+								<label>
+									<input type="checkbox" class="checkbox" v-model='item.crossedOff'>
+									<span 
+										v-bind:class="['custom-checkbox', { nightmode: settings.nightMode }]"
+									></span>
+								</label>
+
+								<textarea 
+									rows="1" 
+									name="list-item" 
+									class="list-input list-item" 
+									v-bind:class="{ 'crossed-off': item.crossedOff, 'delete-mode': deleteMode, nightmode: settings.nightMode }"
+									v-model="item.content"
+									style="resize: none;"
+									v-on:click="listFunction(index)"
+									v-on:keydown="onKeydown($event, index)"
+								>{{ item.content }}</textarea>
+							</li>
+							<li v-for='(item, index) in lists[currentIndex].items' v-if="item.crossedOff" v-bind:key="item.timestamp" v-on:click="listFunction(index)">
+								<label>
+									<input type="checkbox" class="checkbox" v-model='item.crossedOff'>
+									<span 
+										v-bind:class="['custom-checkbox', { nightmode: settings.nightMode }]"
+									></span>
+								</label>
+
+								<textarea 
+									rows="1" 
+									name="list-item" 
+									class="list-input list-item crossed-off"
+									v-bind:class="{ 'delete-mode': deleteMode, nightmode: settings.nightMode }" 
+									v-model="item.content"
+									style="resize: none;"
+									disabled 
+								>{{ item.content }}</textarea>
+							</li>
+						</ul>
+					</div>
+					<div v-if="showScroll" id="scroll-icon"><img src="images/scroll_icon.png"></div>
+				</div>
+			</div>
+			<div id="buttons">
+				<div class="button" id="back-button" v-on:click="showMainList = true">
+					<img src="images/back_icon.png">
+				</div>
+				<div class="button" id="delete-button" v-on:click="deleteMode = !deleteMode, undoMode = false">
+					<div class="button-content">
+						<img src="images/delete_icon.png" alt="Minus Icon"><span>{{ showMainList ? 'Delete List' : 'Delete Item' }}</span>
+					</div>
+				</div>
+				<div class="button" id="add-button" v-on:click="addList">
+					<div class="button-content">
+						<img src="images/add_icon.png" alt="Plus Icon"><span>{{ showMainList ? 'Add List' : 'Add Item' }}</span>
+					</div>
+				</div>
+				<div v-if="deleteMode || undoMode" id="message-container" v-bind:class="{undo: undoMode}">
+					<div v-if="!undoMode" id="message">{{ showMainList ? 'Click list to delete' : 'Click item to delete' }}</div>
+					<div v-else id="message" v-on:click="undoDelete">{{ showMainList ? 'List deleted. Click here to undo.' : 'List item deleted. Click here to undo.' }}</div>
+				</div>
+			</div>
+		</div> <!--#vueApp-->
+	</div> <!--#container-->
+	<script type="text/javascript" src="js/local-storage.js"></script>
+	<script type="text/javascript" src="js/main_vue.js"></script>
+</body>
+
+</html>
