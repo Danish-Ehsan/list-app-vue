@@ -20,7 +20,7 @@
 	<div id="container">
 		<div id="vueApp">
 		<div v-if="settings.showAboutPanel" id="aboutPanel">
-			<div v-on:click="settings.showAboutPanel = false" id="aboutClose">
+			<div v-on:click.prevent="settings.showAboutPanel = false" id="aboutClose">
 				<div class="closeLine"></div>
 				<div class="closeLine"></div>
 			</div>
@@ -45,43 +45,43 @@
 				id="settings" 
 				v-bind:class="{ active: settings.settingsMode }"
 			>
-				<img src="images/settings_icon_brown.png" alt="Settings Icon" id="settings-icon" v-on:click="settings.settingsMode = !settings.settingsMode">
+				<img src="images/settings_icon_brown.png" alt="Settings Icon" id="settings-icon" v-on:click.prevent="settings.settingsMode = !settings.settingsMode">
 				<ul v-if="settings.settingsMode" id="settings-menu">
-					<li v-on:click="settings.sort = !settings.sort">Sort
+					<li v-on:click.prevent="settings.sort = !settings.sort">Sort
 						<ul class="innerMenu" v-show="settings.sort">
-							<li v-on:click="sortList('name')">by name</li>
-							<li v-on:click="sortList('date')">by date</li>
+							<li v-on:click.prevent="sortList('name')">by name</li>
+							<li v-on:click.prevent="sortList('date')">by date</li>
 						</ul>
 					</li>
 					<li v-on:click.prevent="settings.fontSizeSetting = !settings.fontSizeSetting">Font Size
 						<ul class="innerMenu" v-show="settings.fontSizeSetting">
 							<li 
-								v-on:click="setFontSize('small')" 
+								v-on:click.prevent="setFontSize('small')" 
 								v-bind:class="{ active: settings.fontSize == 'small' }"
 							>small</li>
 							<li 
-								v-on:click="setFontSize('medium')"
+								v-on:click.prevent="setFontSize('medium')"
 								v-bind:class="{ active: settings.fontSize == 'medium' }"
 							>medium</li>
 							<li 
-								v-on:click="setFontSize('large')"
+								v-on:click.prevent="setFontSize('large')"
 								v-bind:class="{ active: settings.fontSize == 'large' }"
 							>large</li>
 						</ul>
 					</li>
-					<li v-on:click="settings.nightModeSetting = !settings.nightModeSetting">Night Mode
+					<li v-on:click.prevent="settings.nightModeSetting = !settings.nightModeSetting">Night Mode
 						<ul class="innerMenu" v-show="settings.nightModeSetting">
 							<li 
-								v-on:click="toggleNightMode('on')" 
+								v-on:click.prevent="toggleNightMode('on')" 
 								v-bind:class="{ active: settings.nightMode }"
 							>on</li>
 							<li 
-								v-on:click="toggleNightMode('off')"
+								v-on:click.prevent="toggleNightMode('off')"
 								v-bind:class="{ active: !settings.nightMode }"
 							>off</li>
 						</ul>
 					</li>
-					<li v-on:click="settings.showAboutPanel = !settings.showAboutPanel; settings.settingsMode = false">About</li>
+					<li v-on:click.prevent="settings.showAboutPanel = !settings.showAboutPanel; settings.settingsMode = false">About</li>
 				</ul>
 			</div>
 		</header>
@@ -97,7 +97,7 @@
 									v-for="(list, index) in lists" 
 									v-bind:class="{ nightmode: settings.nightMode }"
 									v-bind:key="index" 
-									v-on:click="listFunction(index)"
+									v-on:click.prevent="listFunction(index)"
 								>{{ list.name ? list.name : 'unnamed' }}</li>
 							</ul>
 						</div>
@@ -158,22 +158,22 @@
 				</div><!--#list-container-->
 			</div>
 			<div id="buttons">
-				<div class="button" id="back-button" v-on:click="showMainList = true">
+				<div class="button" id="back-button" v-on:click.prevent="showMainList = true">
 					<img src="images/back_icon.png">
 				</div>
-				<div class="button" id="delete-button" v-on:click="deleteMode = !deleteMode, undoMode = false">
+				<div class="button" id="delete-button" v-on:click.prevent="deleteMode = !deleteMode, undoMode = false">
 					<div class="button-content">
 						<img src="images/delete_icon.png" alt="Minus Icon"><span>{{ showMainList ? 'Delete List' : 'Delete Item' }}</span>
 					</div>
 				</div>
-				<div class="button" id="add-button" v-on:click="addList">
+				<div class="button" id="add-button" v-on:click.prevent="addList">
 					<div class="button-content">
 						<img src="images/add_icon.png" alt="Plus Icon"><span>{{ showMainList ? 'Add List' : 'Add Item' }}</span>
 					</div>
 				</div>
 				<div v-if="deleteMode || undoMode" id="message-container" v-bind:class="{undo: undoMode}">
 					<div v-if="!undoMode" id="message">{{ showMainList ? 'Click list to delete' : 'Click item to delete' }}</div>
-					<div v-else id="message" v-on:click="undoDelete">{{ showMainList ? 'List deleted. Click here to undo.' : 'List item deleted. Click here to undo.' }}</div>
+					<div v-else id="message" v-on:click.prevent="undoDelete">{{ showMainList ? 'List deleted. Click here to undo.' : 'List item deleted. Click here to undo.' }}</div>
 				</div>
 			</div>
 		</div> <!--#vueApp-->
