@@ -36,11 +36,80 @@ html, body {
 	width: 100%;
 	max-width: 800px;
 	height: 80%;
+	min-height: 350px;
 	margin: 0 auto;
 	border-radius: 7px;
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
+}
+
+#aboutPanel {
+	position: absolute;
+	width: 70%;
+	height: 60%;
+	border: 3px solid $primary-yellow;
+	background-color: $dark-grey;
+	color: #fff;
+	z-index: 100;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	top: 50%;
+	transform: translateY(-50%);
+
+	#aboutClose {
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		cursor: pointer;
+
+		.closeLine {
+			width: 20px;
+			height: 3px;
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+			top: 50%;
+			transform: translateY(-50%);
+			background-color: #fff;
+			transform-origin: 50% 50%;
+			transform: rotate(45deg);
+		}
+
+		.closeLine:first-of-type {
+			transform: rotate(315deg);
+		}
+	}
+
+	#aboutCopyCont {
+		height: 100%;
+		padding: 15% 10%;
+		box-sizing: border-box;
+		overflow: scroll;
+		font-weight: 300;
+		font-size: 11pt;
+		line-height: 1.2;
+
+		p {
+			margin-bottom: 20px;
+		}
+	}
+
+	.subhead {
+		color: $primary-yellow;
+		font-weight: 400;
+		display: block;
+		padding-bottom: 3px;
+	}
+
+	ul {
+		list-style-type: circle;
+		padding-left: 20px;
+	}
 }
 
 #vueApp {
@@ -66,9 +135,9 @@ header {
 
 #settings {
 	float: right;
-	padding: 5px;
+	padding: 5px 5px 0 5px;
 	position: relative;
-	width: 20px;
+	width: 30px;
 	top: 100%;
 	left: 5px;
 	overflow: visible;
@@ -76,23 +145,30 @@ header {
 	background-color: $primary-grey;
 	&.active {
 		background-color: $secondary-grey;
+
+		img {
+			background-color: $dark-grey;
+		}
 	}
 	img {
 		width: 100%;
 		cursor: pointer;
+		padding: 5px;
+		box-sizing: border-box;
 	}
 }
 
 #settings-menu {
 	position: absolute;
-	top: 100%;
-	right: 0;
-	width: 90px;
-	background-color: $secondary-grey;
+	box-sizing: border-box;
+	top: 98%;
+	right: 5px;
+	width: 110px;
+	background-color: $dark-grey;
 	color: white;
 	font-family: 'classico-urw';
 	font-weight: 200;
-	padding: 10px 10px;
+	padding: 10px;
 	text-align: right;
 	box-shadow: 2px 2px 5px $dark-grey;
 	border-right: 3px solid $primary-yellow;
@@ -100,7 +176,7 @@ header {
 		display: block;
 	}
 	li {
-		padding: 8px 0;
+		margin: 8px 0 16px 0;
 		position: relative;
 		display: block;
 		cursor: pointer;
@@ -176,7 +252,6 @@ li > ul {
 	overflow: hidden;
 }
 
-
 #individual-list {
 	margin: 17px auto 0 auto;
 	width: 90%;
@@ -211,6 +286,16 @@ li > ul {
 		}
 
 	}
+}
+
+.smallFont #individual-list textarea {
+	font-size: 10.5pt;
+	bottom: 4px;
+}
+
+.largeFont #individual-list textarea {
+	font-size: 13.5pt;
+	bottom: 8px;
 }
 
 #list-title {
@@ -301,9 +386,8 @@ label input:checked ~ .custom-checkbox:after {
 	}
 }
 
-
 #buttons {
-	width: 96%;
+	width: 96.5%;
 	margin: 0 auto;
 	font-size: 0;
 	padding-bottom: 30px;
@@ -316,7 +400,7 @@ label input:checked ~ .custom-checkbox:after {
 	height: 40px;
 	display: inline-block;
 	text-align: center;
-	background-color: $secondary-grey;
+	background-color: $dark-grey;
 	box-sizing: border-box;
 	cursor: pointer;
 }
@@ -325,9 +409,9 @@ label input:checked ~ .custom-checkbox:after {
 	font-size: 0;
 	width: 12%;
 	border-bottom-left-radius: 9px;
-	border-right: 1px solid $dark-grey;
-	border-bottom: 2px solid $dark-grey;
-	border-left: 2px solid $dark-grey;
+	border-right: 1px solid $primary-grey;
+	border-bottom: 2px solid $primary-grey;
+	border-left: 2px solid $primary-grey;
 	vertical-align: top;
 	img {
 		height: 35%;
@@ -353,17 +437,17 @@ label input:checked ~ .custom-checkbox:after {
 	border-bottom-right-radius: 9px;
 	color: $primary-yellow;
 	text-transform: uppercase;
-	border-right: 2px solid $dark-grey;
-	border-bottom: 2px solid $dark-grey;
-	border-left: 1px solid $dark-grey;
+	border-right: 2px solid $primary-grey;
+	border-bottom: 2px solid $primary-grey;
+	border-left: 1px solid $primary-grey;
 }
 
 #delete-button {
 	color: $primary-red;
 	text-transform: uppercase;
-	border-left: 1px solid $dark-grey;
-	border-bottom: 2px solid $dark-grey;
-	border-right: 1px solid $dark-grey;
+	border-left: 1px solid $primary-grey;
+	border-bottom: 2px solid $primary-grey;
+	border-right: 1px solid $primary-grey;
 }
 
 #message-container {
@@ -452,8 +536,18 @@ label input:checked ~ .custom-checkbox:after {
 
 	#individual-list textarea {
 		width: 85%;
+		font-size: 12.5pt;
+		bottom: 4px;
+	}
+
+	.smallFont #individual-list textarea {
 		font-size: 11pt;
-		bottom: 2px;
+		bottom: 3px;
+	}
+
+	.largeFont #individual-list textarea {
+		font-size: 14pt;
+		bottom: 6px;
 	}
 
 	#buttons {

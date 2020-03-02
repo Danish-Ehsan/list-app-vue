@@ -34,6 +34,7 @@ if (localStorage.listAppData) {
 		lastDeleted: null,
 		settings: {
 			settingsMode: false,
+			showAboutPanel: false,
 			sort: false,
 			fontSizeSetting: false,
 			fontSize: 'medium',

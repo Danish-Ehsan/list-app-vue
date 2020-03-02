@@ -19,6 +19,26 @@
 <body>
 	<div id="container">
 		<div id="vueApp">
+		<div v-if="settings.showAboutPanel" id="aboutPanel">
+			<div v-on:click="settings.showAboutPanel = false" id="aboutClose">
+				<div class="closeLine"></div>
+				<div class="closeLine"></div>
+			</div>
+			<div id="aboutCopyCont">
+				<p><span class="subhead">Created By:<br></span>Danish Ehsan</p>
+				<p><span class="subhead">Purpose:<br></span>To practice Javascript, Vue.js and CSS/SASS</p>
+					<span class="subhead">Features:<br></span>
+					<ul>
+						<li>DOM rendering handled by Vue.js</li>
+						<li>Saves data and settings in Local Storage</li>
+						<li>Ability to undo deletes temporarily</li>
+						<li>Sort lists and items by Name or Date</li>
+						<li>Change font size</li>
+						<li>Enable night mode</li>
+						<li>Responsive styling</li>
+					</ul>
+			</div>
+		</div>
 		<header>
 			<div id="logo"><img src="images/logo.png" alt="Idea Drawer Logo"></logo></div>
 			<div 
@@ -61,7 +81,7 @@
 							>off</li>
 						</ul>
 					</li>
-					<li>About</li>
+					<li v-on:click="settings.showAboutPanel = !settings.showAboutPanel; settings.settingsMode = false">About</li>
 				</ul>
 			</div>
 		</header>
