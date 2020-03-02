@@ -53,7 +53,7 @@
 							<li v-on:click="sortList('date')">by date</li>
 						</ul>
 					</li>
-					<li v-on:click="settings.fontSizeSetting = !settings.fontSizeSetting">Font Size
+					<li v-on:click.prevent="settings.fontSizeSetting = !settings.fontSizeSetting">Font Size
 						<ul class="innerMenu" v-show="settings.fontSizeSetting">
 							<li 
 								v-on:click="setFontSize('small')" 
