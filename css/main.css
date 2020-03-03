@@ -475,15 +475,15 @@ label input:checked ~ .custom-checkbox:after {
   #individual-list textarea {
     width: 85%;
     font-size: 12.5pt;
-    bottom: 0px; }
+    bottom: 1px; }
 
   .smallFont #individual-list textarea {
     font-size: 11pt;
-    bottom: 0px; }
+    bottom: 3px; }
 
   .largeFont #individual-list textarea {
     font-size: 14pt;
-    bottom: 0px; }
+    bottom: 2px; }
 
   #buttons {
     padding-bottom: 10px; }
