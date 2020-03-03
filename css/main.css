@@ -479,11 +479,11 @@ label input:checked ~ .custom-checkbox:after {
 
   .smallFont #individual-list textarea {
     font-size: 11pt;
-    bottom: 3px; }
+    bottom: 0px; }
 
   .largeFont #individual-list textarea {
     font-size: 14pt;
-    bottom: 2px; }
+    bottom: 3px; }
 
   #buttons {
     padding-bottom: 10px; }
