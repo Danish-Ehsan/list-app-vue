@@ -474,7 +474,7 @@ label input:checked ~ .custom-checkbox:after {
     top: 30px; }
 
   #individual-list li {
-    vertical-align: middle; }
+    vertical-align: top; }
   #individual-list textarea {
     width: 85%;
     font-size: 12.5pt;
