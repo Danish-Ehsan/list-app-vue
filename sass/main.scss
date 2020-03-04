@@ -260,7 +260,7 @@ li > ul {
 	li {
 		/*list-style: disc inside;*/
 		font-size: 10pt;
-		margin: 8px 0;
+		margin: 10px 0;
 		position: relative;
 	}
 	textarea {
@@ -271,8 +271,9 @@ li > ul {
 		color: $primary-grey;
 		vertical-align: top;
 		position: relative;
-		bottom: 7px;
+		bottom: 5px;
 		overflow: hidden;
+		line-height: 1.2;
 		&.crossed-off {
 			text-decoration: line-through;
 			opacity: 0.6;
@@ -290,12 +291,12 @@ li > ul {
 
 .smallFont #individual-list textarea {
 	font-size: 10.5pt;
-	bottom: 4px;
+	bottom: 3px;
 }
 
 .largeFont #individual-list textarea {
 	font-size: 13.5pt;
-	bottom: 8px;
+	bottom: 6px;
 }
 
 #list-title {
