@@ -536,8 +536,12 @@ label input:checked ~ .custom-checkbox:after {
 	}
 
 	#individual-list {
-		li {
-			vertical-align: top;
+		* {
+			vertical-align: middle;
+		}
+
+		li * {
+			vertical-align: middle;
 		}
 		textarea {
 			width: 85%;
