@@ -465,7 +465,16 @@ label input:checked ~ .custom-checkbox:after {
     padding: 50px 0 50px 0; }
 
   .absolute {
-    top: 50px; } }
+    top: 50px; }
+
+  #individual-list textarea {
+    bottom: 3px; }
+
+  .smallFont #individual-list textarea {
+    bottom: 0px; }
+
+  .largeFont #individual-list textarea {
+    bottom: 3px; } }
 @media only screen and (max-width: 550px) {
   header {
     height: 56px; }
@@ -495,7 +504,7 @@ label input:checked ~ .custom-checkbox:after {
 
   .largeFont #individual-list textarea {
     font-size: 14pt;
-    bottom: 3px; }
+    bottom: 5px; }
 
   #buttons {
     padding-bottom: 10px; }
