@@ -8,6 +8,12 @@ var vm = new Vue({
 			this.showMainList = false;
 			this.deleteMode = false;
 			this.undoMode = false;
+			this.$nextTick(function () {
+				const listItems = document.getElementsByClassName('list-item');
+				for (const item of listItems) {
+					this.calcTextArea(item);
+				}
+			});
 		},
 		addList: function() {
 			if (this.showMainList) {
@@ -91,14 +97,17 @@ var vm = new Vue({
 					this.focusOnItem();
 				});
 			}
-			//add row to textarea as required
 			if (target.name == 'list-item') {
-				//row needs to shrink to 1 each time to shrink the box when text is deleted
-				target.rows = 1;
-				while (target.scrollHeight > target.offsetHeight) {
-					var rows = target.rows;
-					target.rows = rows + 1;
-				}		
+				this.calcTextArea(target);
+			}
+		},
+		calcTextArea: function (target) {
+			target.rows = 1;
+			console.log('scrollHeight: ' + target.scrollHeight);
+			console.log('offsetHeight: ' + target.offsetHeight);
+			while ((target.scrollHeight - 3) > target.offsetHeight) {
+				var rows = target.rows;
+				target.rows = rows + 1;
 			}
 		},
 		getTimestamp: function() {
