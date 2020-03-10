@@ -247,8 +247,15 @@ li > ul {
 #individual-list {
   margin: 17px auto 0 auto;
   width: 90%;
-  max-height: 75%;
-  overflow: scroll; }
+  max-height: calc(100% - 50px);
+  overflow: auto;
+  background: linear-gradient(#fef6d2 30%, rgba(254, 246, 210, 0)), linear-gradient(rgba(254, 246, 210, 0), #fef6d2 70%) 0 100%, radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 102%;
+  background: linear-gradient(#fef6d2 30%, rgba(254, 246, 210, 0)), linear-gradient(rgba(254, 246, 210, 0), #fef6d2 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-color: #fef6d2;
+  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+  /* Opera doesn't support this in the shorthand */
+  background-attachment: local, local, scroll, scroll; }
   #individual-list li {
     /*list-style: disc inside;*/
     font-size: 10pt;
@@ -335,7 +342,7 @@ label input:checked ~ .custom-checkbox:after {
   display: block; }
 
 .list-input {
-  background-color: #fef6d2;
+  background-color: transparent;
   border: none; }
   .list-input:focus {
     outline: none;
@@ -474,9 +481,9 @@ label input:checked ~ .custom-checkbox:after {
     top: 30px; }
 
   #individual-list * {
-    vertical-align: middle; }
+    vertical-align: text-top; }
   #individual-list li * {
-    vertical-align: middle; }
+    vertical-align: text-top; }
   #individual-list textarea {
     width: 85%;
     font-size: 12.5pt;
