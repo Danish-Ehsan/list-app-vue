@@ -132,6 +132,7 @@
 										style="resize: none;"
 										v-on:click="listFunction(index)"
 										v-on:keydown="onKeydown($event, index)"
+										v-on:input="calcTextArea($event.target)"
 									>{{ item.content }}</textarea>
 								</li>
 								<li v-for='(item, index) in lists[currentIndex].items' v-if="item.crossedOff" v-bind:key="item.timestamp" v-on:click="listFunction(index)">

@@ -97,9 +97,6 @@ var vm = new Vue({
 					this.focusOnItem();
 				});
 			}
-			if (target.name == 'list-item') {
-				this.calcTextArea(target);
-			}
 		},
 		calcTextArea: function (target) {
 			target.rows = 1;
