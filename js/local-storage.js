@@ -21,6 +21,10 @@ var data;
 
 if (localStorage.listAppData) {
 	data = JSON.parse(localStorage.listAppData);
+
+	data.showMainList = true;
+	data.deleteMode = false;
+	data.undoMode = false;
 	console.log('localStorage test1');
 } else {
 	console.log('localStorage test2');
