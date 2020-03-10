@@ -500,7 +500,7 @@ label input:checked ~ .custom-checkbox:after {
 
   .smallFont #individual-list textarea {
     font-size: 11pt;
-    bottom: 3px; }
+    bottom: 2px; }
 
   .largeFont #individual-list textarea {
     font-size: 14pt;
